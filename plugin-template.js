@@ -5,8 +5,12 @@ define('seajs/plugin-template', function (require, exports, module) {
  * https://github.com/aui/artTemplate
  * Released under the MIT, BSD, and GPL Licenses
  * Email: 1987.tangbin@gmail.com
+ *
+ * plugin-template - Template Engine for seajs
+ * https://github.com/sizkin/artEmplate-for-seajs
+ * @author sizkin(Nick Chan)<sizkin@gmail.com>
  */
- 
+
 
 /**
  * 模板引擎路由函数
@@ -16,15 +20,6 @@ define('seajs/plugin-template', function (require, exports, module) {
  * @param   {Object, String}    数据或者模板字符串
  * @return  {String, Function}  渲染好的HTML字符串或者渲染方法
  */
-// var template = function (id, content) {
-//     return template[
-//         typeof content === 'object' ? 'render' : 'compile'
-//     ].apply(template, arguments);
-// };
-// var id = 'test';
-// require.async('views/'+ id +'.tpl', function (res) {
-//     console.log( res );
-// });
 
 (function () {
     "use strict";
@@ -65,10 +60,7 @@ define('seajs/plugin-template', function (require, exports, module) {
     };
 
     exports.render2 = function (id, data) {
-        console.log(id);
-        console.log( _cache.hasOwnProperty(id) );
         if ( !_cache.hasOwnProperty(id) ) {
-            console.log('has ' + id);
             require.async('views/'+ id +'.tpl', function (res) {
                 _cache[id] = exports.compile(res)(data);
                 return exports.render2(id, data);
@@ -454,7 +446,22 @@ define('seajs/plugin-template', function (require, exports, module) {
 
     // Append to document
     var _append2document = function (content) {
-        document.body.innerHTML = content;
+        var div
+        ,   _fb_root
+        ,   fb_root_parent
+        ;
+
+        div = document.createElement('div');
+		      div.innerHTML = content;
+
+        _fb_root = document.querySelector('#fb-root');
+        if ( _fb_root === null ) {
+            document.body.appendChild(div);
+        } else {
+            // If there is facebook element, insertBefore it
+            fb_root_parent = _fb_root.parentNode;
+            document.body.insertBefore(div, _fb_root);
+        }
     };
 
     // 模板调试器
@@ -498,9 +505,6 @@ define('seajs/plugin-template', function (require, exports, module) {
     };
 
 })();
-// if (typeof module !== 'undefined' && module.exports) {
-//     module.exports = template;    
-// }
 
 
 });
