@@ -11,14 +11,8 @@ Simple use please look for [artTemplate].
 
 Usage
 -----
-
-For using the plugin, you need to preload the plugin-text first.
-
-    seajs.config({
-      preload: ['plugin-text']
-    });
     
-Then you can start use the template just like below.
+You can just start use the template like below.
 
     // require the artTemplate
     var art = require('plugin-template');
