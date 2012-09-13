@@ -470,7 +470,6 @@ define('seajs/plugin-template', ['seajs/plugin-text'], function (require, export
       div.innerHTML = content;
 
       if ( arguments.length === 2 && typeof(arguments[1]) === 'string' ) {
-    	console.log(targetElem);
         document.querySelector(targetElem).appendChild(div);
       } else {
         _fb_root = document.getElementById('fb-root');
