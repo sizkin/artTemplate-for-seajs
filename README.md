@@ -12,7 +12,7 @@ Simple use please look for [artTemplate].
 Updated
 -------
 
-New feature: Add the option that you can append the template in the html element where you want. 
+New feature: Add the option that you can append the template in the html element where you want.  
 Example: 
 
     art.render2({template name}, {element}?, {data}?);
